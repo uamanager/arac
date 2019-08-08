@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "declaration": true,
+    "strictNullChecks": false,
+    "removeComments": false,
+    "moduleResolution": "es5",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+    "outDir": "../lib/"
+  },
+  "include": [
+    "../src/**/*"
+  ],
+  "exclude": [
+    "../lib"
+  ],
+  "types": [
+    "node",
+    "fs"
+  ]
+}
