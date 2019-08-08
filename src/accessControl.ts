@@ -72,12 +72,16 @@ export class AccessControl {
             }
             const [staticChecker, ...dynamicCheckers] = dump[hash][action];
             const dynamicCheckersFunctions = dynamicCheckers.map((functionName) => {
-                if (checkersMap.hasOwnProperty(functionName)) {
-                  return checkersMap[functionName];
-                } else {
-                  this.error('AccessControl', 'import', `${functionName} is not defined in checkers map.`);
-                }
-              });
+              if (checkersMap.hasOwnProperty(functionName)) {
+                return checkersMap[functionName];
+              } else {
+                this.error(
+                  'AccessControl',
+                  'import',
+                  `${functionName} is not defined in checkers map.`
+                );
+              }
+            });
             this.permission(action, hash, staticChecker, dynamicCheckersFunctions);
           });
       });

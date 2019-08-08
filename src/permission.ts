@@ -38,7 +38,7 @@ export class Permission {
   ) {
     const checkersPerActions = this.dynamicCheckers[action];
     if (!checkersPerActions.hasOwnProperty(name)) {
-      this.dynamicCheckers[action][name] = new DynamicChecker(checker)
+      this.dynamicCheckers[action][name] = new DynamicChecker(checker);
     }
   }
 }

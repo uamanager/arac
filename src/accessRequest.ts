@@ -51,7 +51,7 @@ export class AccessRequest {
         action,
         this.roleName,
         resourceName
-      ) : Promise.resolve())
+        ) : Promise.resolve())
         .catch((err) => {
           return Promise.reject(err);
         });
