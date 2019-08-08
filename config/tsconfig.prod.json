@@ -5,7 +5,7 @@
     "declaration": true,
     "strictNullChecks": false,
     "removeComments": false,
-    "moduleResolution": "es5",
+    "moduleResolution": "classic",
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "outDir": "../lib/"
