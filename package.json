@@ -1,16 +1,22 @@
 {
-  "name": "permissions",
+  "name": "access-control",
   "version": "0.0.1",
-  "main": "lib/index.js",
-  "author": "Ivan Panarin <ivan.panarin@streamus.io>",
-  "license": "Private",
+  "author": "uamanager",
+  "license": "MIT",
   "private": true,
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": ["lib/**/*"],
   "scripts": {
     "build:dev": "webpack --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
     "build:watch": "webpack --config webpack.dev.js --watch",
-    "clean": "rm -rf node_modules dist"
+    "clean": "rm -rf node_modules dist",
+    "prepare": "webpack --config webpack.prod.js",
+    "prepublishOnly": "yarn test && yarn run lint",
+    "preversion": "yarn run lint",
+    "version": "yarn run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
   },
