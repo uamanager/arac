@@ -23,7 +23,8 @@
 
 Define roles, resources one by one:
 
-```ts
+```typescript
+  import {AccessControl} from 'arac';
   const arac = new AccessControl();
   
   arac.role('admin')          // define role
@@ -42,11 +43,12 @@ Define roles, resources one by one:
 
 Define roles, resources and static permissions one by one:
 
-```ts
+```typescript
+  import {AccessControl} from 'arac';
+  const arac = new AccessControl();
+
   // main template for permissions definition:
   // arac.[allow | deny](<role>).[create | read | update | delete](<resource>)
-  
-  const arac = new AccessControl();
   
   arac.allow('admin') // define new or modify existing role
       .create('api')  // define new or modify existing recource and define new or modify existing permission
@@ -60,7 +62,7 @@ Define roles, resources and static permissions one by one:
 
 Get permission:
 
-```ts
+```typescript
   const arac = new AccessControl();
   
   // ... roles and permissions definition
