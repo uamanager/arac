@@ -13,10 +13,10 @@
 
 ### Import
 
-```ts
+```typescript
   import {AccessControl} from 'arac';
   // or:
-  // const AccessControl = require('arac');
+  const AccessControl = require('arac');
 ```
 
 ### Basic Usage
@@ -63,6 +63,7 @@ Define roles, resources and static permissions one by one:
 Get permission:
 
 ```typescript
+  import {AccessControl} from 'arac';
   const arac = new AccessControl();
   
   // ... roles and permissions definition
