@@ -1,7 +1,7 @@
 import {AccessControl} from './accessControl';
 
 export class Role {
-  constructor (private name: string, private accessControl: AccessControl) {
+  constructor (readonly name: string, readonly accessControl: AccessControl) {
   }
 
   public role (name: string) {

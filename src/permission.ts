@@ -14,8 +14,8 @@ export class Permission {
   };
 
   constructor (
-    private role: Role,
-    private resource: Resource,
+    readonly role: Role,
+    readonly resource: Resource,
     permissions?: Partial<{ [key in Actions]: boolean }>
   ) {
     this.staticChecker = new StaticChecker();

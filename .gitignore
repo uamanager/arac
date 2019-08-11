@@ -65,3 +65,5 @@ typings/
 lib
 .rpt2_cache
 
+.DS_Store
+.idea

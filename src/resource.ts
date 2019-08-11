@@ -7,7 +7,7 @@ export class Resource {
   constructor (
     readonly name: string,
     readonly path: string,
-    private accessControl: AccessControl,
+    readonly accessControl: AccessControl,
     readonly parent: Resource | null = null
   ) {
     this.name = Resource.nameFromPath(path);

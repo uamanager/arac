@@ -3,8 +3,7 @@ import {Actions} from './actions';
 export type TDynamicCheckerFunction = (
   action: Actions,
   roleName: string,
-  resourceName: string,
-  ...args
+  resourceName: string
 ) => Promise<any>;
 
 export class DynamicChecker {
