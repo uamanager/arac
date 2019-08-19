@@ -1,0 +1,68 @@
+[
+  {
+    "role": "role1",
+    "resource": "resource1",
+    "permissions": {
+      "create": [
+        true,
+        "dynamicCheckerResolve"
+      ],
+      "read": [
+        false,
+        "dynamicCheckerResolve"
+      ],
+      "update": [
+        true,
+        "dynamicCheckerReject"
+      ],
+      "delete": [
+        false,
+        "dynamicCheckerReject"
+      ]
+    }
+  },
+  {
+    "role": "role1",
+    "resource": "resource2",
+    "permissions": {
+      "create": [
+        true,
+        "dynamicCheckerResolve"
+      ],
+      "read": [
+        false,
+        "dynamicCheckerResolve"
+      ],
+      "update": [
+        true,
+        "dynamicCheckerReject"
+      ],
+      "delete": [
+        false,
+        "dynamicCheckerReject"
+      ]
+    }
+  },
+  {
+    "role": "role2",
+    "resource": "resource2",
+    "permissions": {
+      "create": [
+        true,
+        "dynamicCheckerResolve"
+      ],
+      "read": [
+        false,
+        "dynamicCheckerResolve"
+      ],
+      "update": [
+        true,
+        "dynamicCheckerReject"
+      ],
+      "delete": [
+        false,
+        "dynamicCheckerReject"
+      ]
+    }
+  }
+]
