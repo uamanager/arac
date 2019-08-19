@@ -37,21 +37,33 @@ export class AccessRequest {
       this.roleName,
       resourceName
     )];
+
     return this.check(Actions.DELETE, resourceName, permissions);
   }
 
-  private check (action: Actions, resourceName: string, permissions: Permission) {
-    const dynamicCheckers = permissions.dynamicCheckers[action];
-    const dynamicCheckersArray = Object.keys(dynamicCheckers)
-      .map(name => dynamicCheckers[name]);
-    const checkers = [permissions.staticChecker, ...dynamicCheckersArray];
+  private check (
+    action: Actions,
+    resourceName: string,
+    permissions: Permission | undefined
+  ) {
+    const checkers = [];
+
+    if (!!permissions) {
+      const dynamicCheckers = permissions.dynamicCheckers[action];
+      checkers.push(
+        permissions.staticChecker,
+        ...Object.keys(dynamicCheckers).map(name => dynamicCheckers[name])
+      );
+    } else {
+      return Promise.reject(false);
+    }
 
     return checkers.reduce((prev, next) => {
       return prev.then(() => !!next.check ? next.check(
         action,
         this.roleName,
         resourceName
-        ) : Promise.resolve())
+        ) : Promise.resolve(true))
         .catch((err) => {
           return Promise.reject(err);
         });

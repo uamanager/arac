@@ -4,7 +4,7 @@ export type TDynamicCheckerFunction = (
   action: Actions,
   roleName: string,
   resourceName: string
-) => Promise<any>;
+) => Promise<boolean>;
 
 export class DynamicChecker {
   constructor (

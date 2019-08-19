@@ -19,9 +19,6 @@ export class StaticChecker {
     roleName: string,
     resourceName: string
   ): Promise<any> {
-    if (this.permissions.hasOwnProperty(action)) {
-      return this.permissions[action] ? Promise.resolve(true) : Promise.reject(false);
-    }
-    return Promise.reject(false);
+    return this.permissions[action] ? Promise.resolve(true) : Promise.reject(false);
   }
 }
