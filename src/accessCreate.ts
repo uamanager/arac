@@ -15,7 +15,7 @@ export class AccessCreate {
     this.accessControl.permission(
       Actions.CREATE,
       AccessControl.hash(this.roleName, resourceName),
-      {[Actions.CREATE]: this.allowed},
+      this.allowed,
       dynamicCheckers
     );
 
@@ -28,7 +28,7 @@ export class AccessCreate {
     this.accessControl.permission(
       Actions.READ,
       AccessControl.hash(this.roleName, resourceName),
-      {[Actions.READ]: this.allowed},
+      this.allowed,
       dynamicCheckers
     );
 
@@ -41,7 +41,7 @@ export class AccessCreate {
     this.accessControl.permission(
       Actions.UPDATE,
       AccessControl.hash(this.roleName, resourceName),
-      {[Actions.UPDATE]: this.allowed},
+      this.allowed,
       dynamicCheckers
     );
 
@@ -54,7 +54,7 @@ export class AccessCreate {
     this.accessControl.permission(
       Actions.DELETE,
       AccessControl.hash(this.roleName, resourceName),
-      {[Actions.DELETE]: this.allowed},
+      this.allowed,
       dynamicCheckers
     );
 

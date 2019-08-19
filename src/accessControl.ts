@@ -61,7 +61,10 @@ export class AccessControl {
               return;
             }
             const [staticChecker, ...dynamicCheckers] = permission.permissions[action];
-            const dynamicCheckersFunctions = dynamicCheckers.reduce((previousValue, functionName: string) => {
+            const dynamicCheckersFunctions = dynamicCheckers.reduce((
+              previousValue,
+              functionName: string
+            ) => {
               if (checkersMap.hasOwnProperty(functionName)) {
                 return {
                   ...previousValue,
@@ -134,7 +137,7 @@ export class AccessControl {
   public permission (
     action: Actions,
     hash: string,
-    patch: Partial<{ [key in Actions]: boolean }>,
+    patch: boolean,
     dynamicCheckers?: {
       [key: string]: TDynamicCheckerFunction
     }
@@ -147,7 +150,8 @@ export class AccessControl {
       this._permissions[hash] = new Permission(role, resource);
     }
 
-    this._permissions[hash].patch(patch);
+    this._permissions[hash].patch({[action]: patch});
+
     if (dynamicCheckers) {
       Object.keys(dynamicCheckers)
         .forEach(
