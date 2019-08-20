@@ -1,16 +1,9 @@
 import {AccessControl} from '../src';
+import {checkersMap} from './data/checkers';
 import * as dump from './data/dump.json';
+import * as simpleDump from './data/simplified-dump.json';
 
 let arac;
-
-const checkersMap = {
-  'dynamicCheckerResolve': jest.fn((action, roleName, resourceName): Promise<any> => {
-    return Promise.resolve(true);
-  }),
-  'dynamicCheckerReject': jest.fn((action, roleName, resourceName): Promise<any> => {
-    return Promise.reject(false);
-  })
-};
 
 beforeEach(() => {
   arac = new AccessControl();
@@ -33,6 +26,16 @@ describe('Access Control', () => {
     expect(arac).toMatchSnapshot();
   });
 
+  it('imports simplified dump', () => {
+    arac.import(simpleDump, checkersMap);
+
+    expect(arac).toMatchSnapshot();
+  });
+
+  it('throws error if checkersMap is not specified but used', () => {
+    expect(() => {arac.import(simpleDump, {});}).toThrowError(Error);
+  });
+
   it('exports dump', () => {
     arac.import(dump, checkersMap);
     const _dump = arac.export();
@@ -50,6 +53,18 @@ describe('Access Control', () => {
     });
 
     expect(_dump.length).toBe(dump.length);
+  });
+
+  it('returns roles', () => {
+    arac.import(simpleDump, checkersMap);
+
+    expect(arac.roles).toMatchSnapshot();
+  });
+
+  it('returns resources', () => {
+    arac.import(simpleDump, checkersMap);
+
+    expect(arac.resources).toMatchSnapshot();
   });
 
   it('creates role and not creates role copy or throws error', () => {
@@ -70,93 +85,32 @@ describe('Access Control', () => {
     expect(arac).toMatchSnapshot();
   });
 
-  it('creates role, resources and permission', () => {
-    arac.allow('testRole').create('testResource1/testResource2');
-    expect(arac).toMatchSnapshot();
-    arac.allow('testRole').read('testResource1/testResource2');
-    expect(arac).toMatchSnapshot();
-    arac.allow('testRole').update('testResource1/testResource2');
-    expect(arac).toMatchSnapshot();
-    arac.allow('testRole').delete('testResource1/testResource2');
-    expect(arac).toMatchSnapshot();
-  });
-
-  it('creates role, resources and permission with dynamic checker', () => {
-    arac.allow('testRole')
-      .create(
-        'testResource1/testResource2',
-        {dynamicCheckerResolve: checkersMap.dynamicCheckerResolve}
-      );
-    expect(arac).toMatchSnapshot();
-    arac.allow('testRole')
-      .read(
-        'testResource1/testResource2',
-        {dynamicCheckerReject: checkersMap.dynamicCheckerReject}
-      );
-    expect(arac).toMatchSnapshot();
-    arac.allow('testRole')
-      .update(
-        'testResource1/testResource2',
-        {dynamicCheckerResolve: checkersMap.dynamicCheckerResolve}
-      );
-    expect(arac).toMatchSnapshot();
-    arac.allow('testRole')
-      .delete(
-        'testResource1/testResource2',
-        {dynamicCheckerReject: checkersMap.dynamicCheckerReject}
-      );
+  it('creates roles and resources in chain', () => {
+    arac
+      .role('testRole1')
+      .resource('testResource1')
+      .resource('testResource2')
+      .role('testRole2')
+      .role('testRole3');
     expect(arac).toMatchSnapshot();
   });
 
-  it('resolves static permission', () => {
-    arac.allow('testRole')
-      .create(
-        'testResource1/testResource2'
-      );
-    expect(arac.can('testRole').create('testResource1/testResource2'))
-      .resolves
-      .toEqual(true);
+  it('creates resources on existing level', () => {
+    arac
+      .resource('testResource1')
+      .resource('testResource1/testResource2')
+      .resource('testResource1/testResource3');
+    expect(arac).toMatchSnapshot();
   });
 
-  it('rejects static permission', () => {
-    arac.deny('testRole')
-      .create(
-        'testResource1/testResource2'
-      );
-
-    expect(arac.can('testRole').create('testResource1/testResource2'))
-      .rejects
-      .toEqual(false);
+  it('returns existing resources', () => {
+    const _old = arac.resource('testResource1/testResource3');
+    const _new = arac.resource('testResource1/testResource3');
+    expect(_new.path).toBe(_old.path);
   });
 
-  it('rejects not existed permission', () => {
-    expect(arac.can('testRole').create('testResource1/testResource2'))
-      .rejects
-      .toEqual(false);
-  });
-
-  it('resolves dynamic permission', () => {
-    arac.allow('testRole')
-      .create(
-        'testResource1/testResource2',
-        {dynamicCheckerResolve: checkersMap.dynamicCheckerResolve}
-      );
-
-    expect(arac.can('testRole').create('testResource1/testResource2'))
-      .resolves
-      .toEqual(true);
-  });
-
-  it('rejects dynamic permission', () => {
-    arac.allow('testRole')
-      .create(
-        'testResource1/testResource2',
-        {dynamicCheckerReject: checkersMap.dynamicCheckerReject}
-      );
-
-    expect(arac.can('testRole').create('testResource1/testResource2'))
-      .rejects
-      .toEqual(false);
+  it('creates root resource', () => {
+    arac.resource('/');
+    expect(arac).toMatchSnapshot();
   });
 });
-
