@@ -34,21 +34,18 @@ export class Resource {
     return this.accessControl.resource(path);
   }
 
-  public check (path: string): boolean {
+  public check (path: string = ''): boolean {
     const fromPath = Resource.fromPath(path);
-    if (fromPath.length) {
-      const checkName = fromPath.splice(0, 1)[0];
-      if (this.children.hasOwnProperty(checkName)) {
-        const toPath = Resource.toPath(fromPath);
-        return toPath ? this.children[checkName].check(toPath) : true;
-      } else {
-        return false;
-      }
+    const checkName = fromPath.splice(0, 1)[0];
+    if (this.children.hasOwnProperty(checkName)) {
+      const toPath = Resource.toPath(fromPath);
+      return toPath ? this.children[checkName].check(toPath) : true;
+    } else {
+      return false;
     }
-    return true;
   }
 
-  public get (path: string): Resource {
+  public get (path: string = ''): Resource {
     const fromPath = Resource.fromPath(path);
     const checkName = fromPath.splice(0, 1)[0];
     if (fromPath.length) {
@@ -59,20 +56,16 @@ export class Resource {
     }
   }
 
-  public add (path: string, accessControl: AccessControl): Resource {
+  public add (path: string = '', accessControl: AccessControl): Resource {
     const fromPath = Resource.fromPath(path);
-    if (fromPath.length) {
-      const checkName = fromPath.splice(0, 1)[0];
-      if (!this.children.hasOwnProperty(checkName)) {
-        const newPath = Resource.toPath(this.path ? [this.path, checkName] : [checkName]);
-        this.children[checkName] = new Resource(checkName, newPath, accessControl, this);
-      }
-      const toPath = Resource.toPath(fromPath);
-      return toPath
-             ? this.children[checkName].add(toPath, accessControl)
-             : this.children[checkName];
-    } else {
-      return this;
+    const checkName = fromPath.splice(0, 1)[0];
+    if (!this.children.hasOwnProperty(checkName)) {
+      const newPath = Resource.toPath(this.path ? [this.path, checkName] : [checkName]);
+      this.children[checkName] = new Resource(checkName, newPath, accessControl, this);
     }
+    const toPath = Resource.toPath(fromPath);
+    return toPath
+           ? this.children[checkName].add(toPath, accessControl)
+           : this.children[checkName];
   }
 }

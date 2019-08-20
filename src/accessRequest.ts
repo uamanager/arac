@@ -59,11 +59,8 @@ export class AccessRequest {
     }
 
     return checkers.reduce((prev, next) => {
-      return prev.then(() => !!next.check ? next.check(
-        action,
-        this.roleName,
-        resourceName
-        ) : Promise.resolve(true))
+      return prev
+        .then(() => next.check(action, this.roleName, resourceName))
         .catch((err) => {
           return Promise.reject(err);
         });

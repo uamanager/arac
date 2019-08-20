@@ -15,13 +15,9 @@ export class Permission {
 
   constructor (
     readonly role: Role,
-    readonly resource: Resource,
-    permissions?: Partial<{ [key in Actions]: boolean }>
+    readonly resource: Resource
   ) {
     this.staticChecker = new StaticChecker();
-    if (permissions) {
-      this.patch(permissions);
-    }
   }
 
   public patch (patch: Partial<{ [key in Actions]: boolean }>) {
@@ -36,9 +32,6 @@ export class Permission {
     name: string,
     checker: TDynamicCheckerFunction
   ) {
-    const checkersPerActions = this.dynamicCheckers[action];
-    if (!checkersPerActions.hasOwnProperty(name)) {
-      this.dynamicCheckers[action][name] = new DynamicChecker(checker);
-    }
+    this.dynamicCheckers[action][name] = new DynamicChecker(checker);
   }
 }
