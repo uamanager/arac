@@ -47,8 +47,8 @@ export class AccessControl {
   }
 
   public import (
-    dump: TAccessControlDump,
-    checkersMap: { [key: string]: TDynamicCheckerFunction }
+    dump: TAccessControlDump = [],
+    checkersMap: { [key: string]: TDynamicCheckerFunction } = {}
   ) {
     dump
       .forEach((permission) => {
