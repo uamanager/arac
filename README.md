@@ -1,6 +1,8 @@
 # arac - Async Role Based Access Control
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Build Status](https://img.shields.io/circleci/build/github/uamanager/arac/master?token=abc123def456)](https://circleci.com/gh/uamanager/arac)
+
 ## Installation
 
 ```bash
