@@ -16,7 +16,7 @@
     "url": "https://github.com/uamanager/arac"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=10.16.3"
   },
   "scripts": {
     "prebuild": "rimraf lib",
