@@ -1,4 +1,5 @@
 # arac - Async Role Based Access Control
+
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ## Installation
 
@@ -225,4 +226,3 @@ For import just pass dump and dynamic checkers map in `controller(dump, chekersM
     // or    
     const dump = arac.import(dump, checkersMap);
 ```
-

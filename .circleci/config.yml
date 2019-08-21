@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/arac
+    docker:
+      - image: circleci/node:6.0.0
+    steps:
+      - checkout
+      - run:
+          name: Add Yarn
+          command: 'sudo npm install -g yarn@latest'
+      - run:
+          name: Install Yarn Dependencies
+          command: yarn install
+      - run:
+          name: Run Test
+          command: jest --ci --runInBand --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
