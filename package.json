@@ -25,7 +25,7 @@
     "prepare": "yarn build",
     "postversion": "git push && git push --tags",
     "release": "standard-version && git push --follow-tags origin master && npm login && npm publish",
-    "test": "jest && yarn build"
+    "test": "yarn build && jest"
   },
   "dependencies": {},
   "devDependencies": {
