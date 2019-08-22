@@ -1,5 +1,6 @@
 {
   "name": "arac",
+  "description": "Async Role based Access Control",
   "version": "0.2.2",
   "author": "uamanager",
   "license": "MIT",
@@ -61,5 +62,30 @@
       "pre-commit": "yarn test",
       "pre-push": "yarn test"
     }
-  }
+  },
+  "keywords": [
+    "arac",
+    "async",
+    "rbac",
+    "abac",
+    "access",
+    "access-control",
+    "acl",
+    "role",
+    "grant",
+    "allow",
+    "deny",
+    "permission",
+    "action",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "resource",
+    "express",
+    "admin",
+    "user",
+    "policy"
+  ]
 }
