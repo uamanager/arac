@@ -9,36 +9,27 @@ export class AccessRequest {
   ) {}
 
   create (resourceName: string) {
-    const permissions = this.accessControl.permissions[AccessControl.hash(
-      this.roleName,
-      resourceName
-    )];
-    return this.check(Actions.CREATE, resourceName, permissions);
+    return this.getPermission(Actions.CREATE, resourceName);
   }
 
   read (resourceName: string) {
-    const permissions = this.accessControl.permissions[AccessControl.hash(
-      this.roleName,
-      resourceName
-    )];
-    return this.check(Actions.READ, resourceName, permissions);
+    return this.getPermission(Actions.READ, resourceName);
   }
 
   update (resourceName: string) {
-    const permissions = this.accessControl.permissions[AccessControl.hash(
-      this.roleName,
-      resourceName
-    )];
-    return this.check(Actions.UPDATE, resourceName, permissions);
+    return this.getPermission(Actions.UPDATE, resourceName);
   }
 
   delete (resourceName: string) {
+    return this.getPermission(Actions.DELETE, resourceName);
+  }
+
+  private getPermission (action: Actions, resourceName: string){
     const permissions = this.accessControl.permissions[AccessControl.hash(
       this.roleName,
       resourceName
     )];
-
-    return this.check(Actions.DELETE, resourceName, permissions);
+    return this.check(action, resourceName, permissions);
   }
 
   private check (

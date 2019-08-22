@@ -2,6 +2,7 @@ import {AccessCreate} from './accessCreate';
 import {AccessRequest} from './accessRequest';
 import {Actions} from './actions';
 import {TDynamicCheckerFunction} from './dynamicChecker';
+import {Logger} from './logger';
 import {Permission} from './permission';
 import {Resource} from './resource';
 import {Role} from './role';
@@ -12,10 +13,16 @@ export type TAccessControlDump = {
   permissions: Partial<{ [key in Actions]: [boolean, ...string[]] }>
 }[];
 
+export type TAccessControlDynamicCheckersMap = {
+  [key: string]: TDynamicCheckerFunction
+};
+
 export class AccessControl {
+  private l: Logger = new Logger('AccessControl');
+
   constructor (
     dump: TAccessControlDump = [],
-    checkersMap: { [key: string]: TDynamicCheckerFunction } = {}
+    checkersMap: TAccessControlDynamicCheckersMap = {}
   ) {
     this.import(dump, checkersMap);
   }
@@ -48,39 +55,30 @@ export class AccessControl {
 
   public import (
     dump: TAccessControlDump = [],
-    checkersMap: { [key: string]: TDynamicCheckerFunction } = {}
+    checkersMap: TAccessControlDynamicCheckersMap = {}
   ) {
-    dump
-      .forEach((permission) => {
-        const hash = AccessControl.hash(permission.role, permission.resource);
-        Object
-          .keys(Actions)
-          .forEach((actionName) => {
-            const action = Actions[actionName];
-            if (!permission.permissions.hasOwnProperty(action)) {
-              return;
+    dump.forEach((permission) => {
+      const hash = AccessControl.hash(permission.role, permission.resource);
+      Object.keys(Actions)
+        .forEach((actionName) => {
+          const action = Actions[actionName];
+          if (!permission.permissions.hasOwnProperty(action)) {
+            return;
+          }
+          const [staticChecker, ...dynamicCheckers] = permission.permissions[action];
+          const dynamicCheckersFunctions = dynamicCheckers.reduce((
+            previousValue,
+            functionName: string
+          ) => {
+            if (checkersMap.hasOwnProperty(functionName)) {
+              return {...previousValue, [functionName]: checkersMap[functionName]};
             }
-            const [staticChecker, ...dynamicCheckers] = permission.permissions[action];
-            const dynamicCheckersFunctions = dynamicCheckers.reduce((
-              previousValue,
-              functionName: string
-            ) => {
-              if (checkersMap.hasOwnProperty(functionName)) {
-                return {
-                  ...previousValue,
-                  [functionName]: checkersMap[functionName]
-                };
-              } else {
-                this.error(
-                  'AccessControl',
-                  'import',
-                  `${functionName} is not defined in checkers map.`
-                );
-              }
-            }, {});
-            this.permission(action, hash, staticChecker, dynamicCheckersFunctions);
-          });
-      });
+            this.l.error('import', `${functionName} is not defined in checkers map.`);
+          }, {});
+          this.permission(action, hash, staticChecker, dynamicCheckersFunctions);
+          this.l.log('import', `Import finished!`);
+        });
+    });
   }
 
   public export (): TAccessControlDump {
@@ -97,6 +95,7 @@ export class AccessControl {
             };
           }, {});
 
+        this.l.log('export', `Export finished!`);
         return {
           role: this.permissions[name].role.name,
           resource: this.permissions[name].resource.name,
@@ -138,9 +137,7 @@ export class AccessControl {
     action: Actions,
     hash: string,
     patch: boolean,
-    dynamicCheckers?: {
-      [key: string]: TDynamicCheckerFunction
-    }
+    dynamicCheckers?: TAccessControlDynamicCheckersMap
   ) {
     if (!this._permissions.hasOwnProperty(hash)) {
       const [resourceName, roleName] = AccessControl.unhash(hash);
@@ -161,9 +158,5 @@ export class AccessControl {
             dynamicCheckers[name]
           ));
     }
-  }
-
-  public error (className: string, methodName: string, message: string) {
-    throw new Error(`Class: '${className}', Method: '${methodName}', Error: '${message}'`);
   }
 }
