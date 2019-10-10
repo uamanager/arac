@@ -1,7 +1,7 @@
 {
   "name": "@uamanager/arac",
   "description": "Async Role based Access Control",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "author": "uamanager",
   "license": "MIT",
   "private": false,

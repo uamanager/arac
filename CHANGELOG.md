@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/uamanager/arac/compare/v0.2.3...v0.3.0) (2019-10-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **accesscontrol:** Access Control dump now has more flat format. Now dump and map consist of object
+per action permission instead of object per permission.
+
+### Features
+
+* **accesscontrol:** permissions map update ([0c7ef8a](https://github.com/uamanager/arac/commit/0c7ef8a5cd10db0f920d858824ccc43545b138f3))
+
 ### [0.2.3](https://github.com/uamanager/arac/compare/v0.2.2...v0.2.3) (2019-08-22)
 
 ### [0.2.2](https://github.com/uamanager/arac/compare/v0.2.1...v0.2.2) (2019-08-21)
