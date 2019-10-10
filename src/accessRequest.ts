@@ -1,6 +1,6 @@
 import {AccessControl} from './accessControl';
 import {Actions} from './actions';
-import {Permission} from './permission';
+import {Permission, STATIC_CHECKER_NAME} from './permission';
 
 export class AccessRequest {
   constructor (
@@ -24,30 +24,27 @@ export class AccessRequest {
     return this.getPermission(Actions.DELETE, resourceName);
   }
 
-  private getPermission (action: Actions, resourceName: string){
-    const permissions = this.accessControl.permissions[AccessControl.hash(
+  private getPermission (action: Actions, resourceName: string) {
+    const permissions = this.accessControl.permissions[Permission.hash(
       this.roleName,
-      resourceName
+      resourceName,
+      action
     )];
-    return this.check(action, resourceName, permissions);
+    return permissions ? this.check(action, resourceName, permissions) : Promise.reject(
+      false);
   }
 
   private check (
     action: Actions,
     resourceName: string,
-    permissions: Permission | undefined
+    permissions: Permission
   ) {
-    const checkers = [];
+    const staticChecker = permissions.checkers[STATIC_CHECKER_NAME];
+    const dynamicCheckers = Object.keys(permissions.checkers)
+      .filter(name => name !== STATIC_CHECKER_NAME)
+      .map(name => permissions.checkers[name]);
 
-    if (!!permissions) {
-      const dynamicCheckers = permissions.dynamicCheckers[action];
-      checkers.push(
-        permissions.staticChecker,
-        ...Object.keys(dynamicCheckers).map(name => dynamicCheckers[name])
-      );
-    } else {
-      return Promise.reject(false);
-    }
+    const checkers = [staticChecker, ...dynamicCheckers];
 
     return checkers.reduce((prev, next) => {
       return prev

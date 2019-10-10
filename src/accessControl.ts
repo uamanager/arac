@@ -1,28 +1,19 @@
 import {AccessCreate} from './accessCreate';
 import {AccessRequest} from './accessRequest';
 import {Actions} from './actions';
-import {TDynamicCheckerFunction} from './dynamicChecker';
 import {Logger} from './logger';
-import {Permission} from './permission';
+import {Permission, TPermissionCheckersMap, TPermissionDump} from './permission';
 import {Resource} from './resource';
 import {Role} from './role';
 
-export type TAccessControlDump = {
-  role: string,
-  resource: string,
-  permissions: Partial<{ [key in Actions]: [boolean, ...string[]] }>
-}[];
-
-export type TAccessControlDynamicCheckersMap = {
-  [key: string]: TDynamicCheckerFunction
-};
+export type TAccessControlDump = TPermissionDump[];
 
 export class AccessControl {
   private l: Logger = new Logger('AccessControl');
 
   constructor (
     dump: TAccessControlDump = [],
-    checkersMap: TAccessControlDynamicCheckersMap = {}
+    checkersMap: TPermissionCheckersMap = {}
   ) {
     this.import(dump, checkersMap);
   }
@@ -45,63 +36,35 @@ export class AccessControl {
     return this._permissions;
   }
 
-  public static hash (roleName: string, resourceName: string): string {
-    return [resourceName, roleName].join('#');
-  }
-
-  public static unhash (hash: string): string[] {
-    return hash.split('#');
-  }
-
   public import (
     dump: TAccessControlDump = [],
-    checkersMap: TAccessControlDynamicCheckersMap = {}
+    checkersMap: TPermissionCheckersMap = {}
   ) {
     dump.forEach((permission) => {
-      const hash = AccessControl.hash(permission.role, permission.resource);
-      Object.keys(Actions)
-        .forEach((actionName) => {
-          const action = Actions[actionName];
-          if (!permission.permissions.hasOwnProperty(action)) {
-            return;
-          }
-          const [staticChecker, ...dynamicCheckers] = permission.permissions[action];
-          const dynamicCheckersFunctions = dynamicCheckers.reduce((
-            previousValue,
-            functionName: string
-          ) => {
-            if (checkersMap.hasOwnProperty(functionName)) {
-              return {...previousValue, [functionName]: checkersMap[functionName]};
-            }
-            this.l.error('import', `${functionName} is not defined in checkers map.`);
-          }, {});
-          this.permission(action, hash, staticChecker, dynamicCheckersFunctions);
-          this.l.log('import', `Import finished!`);
-        });
+      const {role: roleName, resource: resourceName, action} = permission;
+
+      const hash = Permission.hash(roleName, resourceName, action);
+      const role = this.role(roleName);
+      const resource = this.resource(resourceName);
+
+      try {
+        this.permissions[hash] = Permission.import(permission, role, resource, checkersMap);
+      }
+      catch (e) {
+        this.l.error('import', e);
+      }
+
+      this.l.log('import', `Import finished!`);
     });
   }
 
   public export (): TAccessControlDump {
-    return Object.keys(this.permissions)
-      .map(name => {
-        let permissions = Object.keys(Actions)
-          .reduce((previousValue, actionName) => {
-            return {
-              ...previousValue,
-              [Actions[actionName]]: [
-                this.permissions[name].staticChecker.permissions[Actions[actionName]],
-                ...Object.keys(this.permissions[name].dynamicCheckers[Actions[actionName]])
-              ]
-            };
-          }, {});
+    const dump = Object.keys(this.permissions)
+      .map(name => Permission.export(this.permissions[name]));
 
-        this.l.log('export', `Export finished!`);
-        return {
-          role: this.permissions[name].role.name,
-          resource: this.permissions[name].resource.name,
-          permissions
-        };
-      });
+    this.l.log('export', `Export finished!`);
+
+    return dump;
   }
 
   public allow (roleName: string): AccessCreate {
@@ -135,28 +98,26 @@ export class AccessControl {
 
   public permission (
     action: Actions,
-    hash: string,
+    roleName: string,
+    resourceName: string,
     patch: boolean,
-    dynamicCheckers?: TAccessControlDynamicCheckersMap
+    dynamicCheckers?: TPermissionCheckersMap
   ) {
-    if (!this._permissions.hasOwnProperty(hash)) {
-      const [resourceName, roleName] = AccessControl.unhash(hash);
-      const role = this.role(roleName);
-      const resource = this.resource(resourceName);
+    const hash = Permission.hash(roleName, resourceName, action);
+    const role = this.role(roleName);
+    const resource = this.resource(resourceName);
 
-      this._permissions[hash] = new Permission(role, resource);
+    try {
+      this._permissions[hash] = new Permission(
+        role,
+        resource,
+        action,
+        patch,
+        dynamicCheckers
+      );
     }
-
-    this._permissions[hash].patch({[action]: patch});
-
-    if (dynamicCheckers) {
-      Object.keys(dynamicCheckers)
-        .forEach(
-          name => this._permissions[hash].addChecker(
-            action,
-            name,
-            dynamicCheckers[name]
-          ));
+    catch (e) {
+      this.l.error('permission', e);
     }
   }
 }

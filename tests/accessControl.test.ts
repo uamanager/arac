@@ -2,6 +2,8 @@ import {AccessControl} from '../src';
 import {checkersMap} from './data/checkers';
 import * as dump from './data/dump.json';
 import * as simpleDump from './data/simplified-dump.json';
+import * as errorStaticDump from './data/error-static-dump.json';
+import * as errorActionDump from './data/error-action-dump.json';
 
 let arac;
 
@@ -112,5 +114,13 @@ describe('Access Control', () => {
   it('creates root resource', () => {
     arac.resource('/');
     expect(arac).toMatchSnapshot();
+  });
+
+  it('throws exception for dynamicChecker with name "static" while import', () => {
+    expect(() => arac.import(errorStaticDump, checkersMap)).toThrowError(Error);
+  });
+
+  it('throws exception for permission with incorrect action while import', () => {
+    expect(() => arac.import(errorActionDump, checkersMap)).toThrowError(Error);
   });
 });

@@ -1,14 +1,16 @@
 import {Actions} from './actions';
 
-export type TDynamicCheckerFunction = (
+export type TCheckerFunction = (
   action: Actions,
   roleName: string,
   resourceName: string
 ) => Promise<boolean>;
 
-export class DynamicChecker {
+export class Checker {
   constructor (
-    public checker: TDynamicCheckerFunction
+    public name: string,
+    public action: Actions,
+    public checker: TCheckerFunction
   ) {
   }
 

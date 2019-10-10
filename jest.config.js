@@ -8,5 +8,6 @@ module.exports = {
   "collectCoverage": true,
   "coveragePathIgnorePatterns": ["/node_modules/", "/tests/"],
   "coverageReporters": ["text", "text-summary", "clover"],
-  "reporters": ["default", "jest-junit"]
+  "reporters": ["default", "jest-junit"],
+  "verbose": true
 };

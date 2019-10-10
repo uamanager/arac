@@ -3,12 +3,15 @@
 exports[`Access Create CREATE creates role, resources and CREATE permission 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {},
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {},
+    "testResource1/testResource2#testRole#create": Permission {
+      "action": "create",
+      "checkers": Object {
+        "static": StaticChecker {
+          "action": "create",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
       },
       "resource": Resource {
         "accessControl": [Circular],
@@ -36,14 +39,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": false,
-        },
       },
     },
   },
@@ -85,16 +80,20 @@ AccessControl {
 exports[`Access Create CREATE creates role, resources and CREATE permission with dynamic checker 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "testResource1/testResource2#testRole#create": Permission {
+      "action": "create",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "create",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
         },
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {},
+        "static": StaticChecker {
+          "action": "create",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
       },
       "resource": Resource {
         "accessControl": [Circular],
@@ -122,14 +121,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": false,
-        },
       },
     },
   },
@@ -171,12 +162,15 @@ AccessControl {
 exports[`Access Create DELETE creates role, resources and DELETE permission 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {},
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {},
+    "testResource1/testResource2#testRole#delete": Permission {
+      "action": "delete",
+      "checkers": Object {
+        "static": StaticChecker {
+          "action": "delete",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
       },
       "resource": Resource {
         "accessControl": [Circular],
@@ -204,14 +198,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": false,
-          "delete": true,
-          "read": false,
-          "update": false,
-        },
       },
     },
   },
@@ -253,16 +239,20 @@ AccessControl {
 exports[`Access Create DELETE creates role, resources and DELETE permission with dynamic checker 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {},
-        "delete": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "testResource1/testResource2#testRole#delete": Permission {
+      "action": "delete",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "delete",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
         },
-        "read": Object {},
-        "update": Object {},
+        "static": StaticChecker {
+          "action": "delete",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
       },
       "resource": Resource {
         "accessControl": [Circular],
@@ -290,14 +280,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": false,
-          "delete": true,
-          "read": false,
-          "update": false,
-        },
       },
     },
   },
@@ -339,12 +321,15 @@ AccessControl {
 exports[`Access Create READ creates role, resources and READ permission 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {},
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {},
+    "testResource1/testResource2#testRole#read": Permission {
+      "action": "read",
+      "checkers": Object {
+        "static": StaticChecker {
+          "action": "read",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
       },
       "resource": Resource {
         "accessControl": [Circular],
@@ -372,14 +357,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": false,
-          "delete": false,
-          "read": true,
-          "update": false,
-        },
       },
     },
   },
@@ -421,16 +398,20 @@ AccessControl {
 exports[`Access Create READ creates role, resources and READ permission with dynamic checker 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {},
-        "delete": Object {},
-        "read": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "testResource1/testResource2#testRole#read": Permission {
+      "action": "read",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "read",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
         },
-        "update": Object {},
+        "static": StaticChecker {
+          "action": "read",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
       },
       "resource": Resource {
         "accessControl": [Circular],
@@ -458,14 +439,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": false,
-          "delete": false,
-          "read": true,
-          "update": false,
-        },
       },
     },
   },
@@ -507,12 +480,15 @@ AccessControl {
 exports[`Access Create UPDATE creates role, resources and UPDATE permission 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {},
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {},
+    "testResource1/testResource2#testRole#update": Permission {
+      "action": "update",
+      "checkers": Object {
+        "static": StaticChecker {
+          "action": "update",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
       },
       "resource": Resource {
         "accessControl": [Circular],
@@ -540,14 +516,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": false,
-          "delete": false,
-          "read": false,
-          "update": true,
-        },
       },
     },
   },
@@ -589,15 +557,19 @@ AccessControl {
 exports[`Access Create UPDATE creates role, resources and UPDATE permission with dynamic checker 1`] = `
 AccessControl {
   "_permissions": Object {
-    "testResource1/testResource2#testRole": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {},
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "testResource1/testResource2#testRole#update": Permission {
+      "action": "update",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "update",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
+        },
+        "static": StaticChecker {
+          "action": "update",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
         },
       },
       "resource": Resource {
@@ -626,14 +598,6 @@ AccessControl {
       "role": Role {
         "accessControl": [Circular],
         "name": "testRole",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": false,
-          "delete": false,
-          "read": false,
-          "update": true,
-        },
       },
     },
   },

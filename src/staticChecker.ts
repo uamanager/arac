@@ -1,24 +1,18 @@
 import {Actions} from './actions';
+import {Checker} from './checker';
 
-export class StaticChecker {
-  public permissions: { [key in Actions]: boolean } = {
-    create: false,
-    read: false,
-    update: false,
-    delete: false
-  };
-
-  constructor (permissions?: { [key in Actions]: boolean }) {
-    if (permissions) {
-      this.permissions = permissions;
-    }
-  }
-
-  public check (
+export class StaticChecker extends Checker {
+  constructor (
+    name: string,
     action: Actions,
-    roleName: string,
-    resourceName: string
-  ): Promise<any> {
-    return this.permissions[action] ? Promise.resolve(true) : Promise.reject(false);
+    public permission: boolean = false
+  ) {
+    super(
+      name,
+      action,
+      () => {
+        return permission ? Promise.resolve(true) : Promise.reject(false);
+      }
+    );
   }
 }

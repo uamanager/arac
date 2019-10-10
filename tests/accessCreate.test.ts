@@ -74,4 +74,14 @@ describe('Access Create DELETE', () => {
       );
     expect(arac).toMatchSnapshot();
   });
+
+  it('throws exception for dynamicChecker with name "static" while permission create', () => {
+    expect(() => {
+      arac.allow('testRole')
+        .delete(
+          'testResource1/testResource2',
+          {static: checkersMap.dynamicCheckerReject}
+        );
+    }).toThrowError(Error);
+  });
 });

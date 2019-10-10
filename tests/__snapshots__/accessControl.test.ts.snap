@@ -215,27 +215,19 @@ AccessControl {
 exports[`Access Control imports dump 1`] = `
 AccessControl {
   "_permissions": Object {
-    "resource1#role1": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "resource1#role1#create": Permission {
+      "action": "create",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "create",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
         },
-        "delete": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
-        },
-        "read": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
-        },
-        "update": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
+        "static": StaticChecker {
+          "action": "create",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
         },
       },
       "resource": Resource {
@@ -264,36 +256,146 @@ AccessControl {
         "accessControl": [Circular],
         "name": "role1",
       },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": true,
+    },
+    "resource1#role1#delete": Permission {
+      "action": "delete",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "delete",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
+        },
+        "static": StaticChecker {
+          "action": "delete",
+          "checker": [Function],
+          "name": "static",
+          "permission": false,
         },
       },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource1",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": [Circular],
+            "resource2": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource2",
+              "parent": [Circular],
+              "path": "resource2",
+            },
+          },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource1",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role1",
+      },
     },
-    "resource2#role1": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "resource1#role1#read": Permission {
+      "action": "read",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "read",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
         },
-        "delete": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
+        "static": StaticChecker {
+          "action": "read",
+          "checker": [Function],
+          "name": "static",
+          "permission": false,
         },
-        "read": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource1",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": [Circular],
+            "resource2": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource2",
+              "parent": [Circular],
+              "path": "resource2",
+            },
           },
+          "name": "",
+          "parent": null,
+          "path": "",
         },
-        "update": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
+        "path": "resource1",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role1",
+      },
+    },
+    "resource1#role1#update": Permission {
+      "action": "update",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "update",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
+        },
+        "static": StaticChecker {
+          "action": "update",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource1",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": [Circular],
+            "resource2": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource2",
+              "parent": [Circular],
+              "path": "resource2",
+            },
           },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource1",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role1",
+      },
+    },
+    "resource2#role1#create": Permission {
+      "action": "create",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "create",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
+        },
+        "static": StaticChecker {
+          "action": "create",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
         },
       },
       "resource": Resource {
@@ -322,36 +424,146 @@ AccessControl {
         "accessControl": [Circular],
         "name": "role1",
       },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": true,
+    },
+    "resource2#role1#delete": Permission {
+      "action": "delete",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "delete",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
+        },
+        "static": StaticChecker {
+          "action": "delete",
+          "checker": [Function],
+          "name": "static",
+          "permission": false,
         },
       },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource2",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource1",
+              "parent": [Circular],
+              "path": "resource1",
+            },
+            "resource2": [Circular],
+          },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource2",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role1",
+      },
     },
-    "resource2#role2": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "resource2#role1#read": Permission {
+      "action": "read",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "read",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
         },
-        "delete": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
+        "static": StaticChecker {
+          "action": "read",
+          "checker": [Function],
+          "name": "static",
+          "permission": false,
         },
-        "read": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource2",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource1",
+              "parent": [Circular],
+              "path": "resource1",
+            },
+            "resource2": [Circular],
           },
+          "name": "",
+          "parent": null,
+          "path": "",
         },
-        "update": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
+        "path": "resource2",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role1",
+      },
+    },
+    "resource2#role1#update": Permission {
+      "action": "update",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "update",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
+        },
+        "static": StaticChecker {
+          "action": "update",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource2",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource1",
+              "parent": [Circular],
+              "path": "resource1",
+            },
+            "resource2": [Circular],
           },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource2",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role1",
+      },
+    },
+    "resource2#role2#create": Permission {
+      "action": "create",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "create",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
+        },
+        "static": StaticChecker {
+          "action": "create",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
         },
       },
       "resource": Resource {
@@ -380,13 +592,131 @@ AccessControl {
         "accessControl": [Circular],
         "name": "role2",
       },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": true,
+    },
+    "resource2#role2#delete": Permission {
+      "action": "delete",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "delete",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
         },
+        "static": StaticChecker {
+          "action": "delete",
+          "checker": [Function],
+          "name": "static",
+          "permission": false,
+        },
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource2",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource1",
+              "parent": [Circular],
+              "path": "resource1",
+            },
+            "resource2": [Circular],
+          },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource2",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role2",
+      },
+    },
+    "resource2#role2#read": Permission {
+      "action": "read",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "read",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
+        },
+        "static": StaticChecker {
+          "action": "read",
+          "checker": [Function],
+          "name": "static",
+          "permission": false,
+        },
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource2",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource1",
+              "parent": [Circular],
+              "path": "resource1",
+            },
+            "resource2": [Circular],
+          },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource2",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role2",
+      },
+    },
+    "resource2#role2#update": Permission {
+      "action": "update",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "update",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
+        },
+        "static": StaticChecker {
+          "action": "update",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
+        },
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource2",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource1",
+              "parent": [Circular],
+              "path": "resource1",
+            },
+            "resource2": [Circular],
+          },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource2",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role2",
       },
     },
   },
@@ -431,19 +761,19 @@ AccessControl {
 exports[`Access Control imports simplified dump 1`] = `
 AccessControl {
   "_permissions": Object {
-    "resource1#role1": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "resource1#role1#create": Permission {
+      "action": "create",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "create",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
         },
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
+        "static": StaticChecker {
+          "action": "create",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
         },
       },
       "resource": Resource {
@@ -472,78 +802,20 @@ AccessControl {
         "accessControl": [Circular],
         "name": "role1",
       },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": true,
-        },
-      },
     },
-    "resource2#role1": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
+    "resource2#role2#create": Permission {
+      "action": "create",
+      "checkers": Object {
+        "dynamicCheckerResolve": Checker {
+          "action": "create",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerResolve",
         },
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
-        },
-      },
-      "resource": Resource {
-        "accessControl": [Circular],
-        "children": Object {},
-        "name": "resource2",
-        "parent": Resource {
-          "accessControl": [Circular],
-          "children": Object {
-            "resource1": Resource {
-              "accessControl": [Circular],
-              "children": Object {},
-              "name": "resource1",
-              "parent": [Circular],
-              "path": "resource1",
-            },
-            "resource2": [Circular],
-          },
-          "name": "",
-          "parent": null,
-          "path": "",
-        },
-        "path": "resource2",
-      },
-      "role": Role {
-        "accessControl": [Circular],
-        "name": "role1",
-      },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": true,
-        },
-      },
-    },
-    "resource2#role2": Permission {
-      "dynamicCheckers": Object {
-        "create": Object {
-          "dynamicCheckerResolve": DynamicChecker {
-            "checker": [MockFunction],
-          },
-        },
-        "delete": Object {},
-        "read": Object {},
-        "update": Object {
-          "dynamicCheckerReject": DynamicChecker {
-            "checker": [MockFunction],
-          },
+        "static": StaticChecker {
+          "action": "create",
+          "checker": [Function],
+          "name": "static",
+          "permission": true,
         },
       },
       "resource": Resource {
@@ -572,13 +844,47 @@ AccessControl {
         "accessControl": [Circular],
         "name": "role2",
       },
-      "staticChecker": StaticChecker {
-        "permissions": Object {
-          "create": true,
-          "delete": false,
-          "read": false,
-          "update": true,
+    },
+    "resource2#role2#update": Permission {
+      "action": "update",
+      "checkers": Object {
+        "dynamicCheckerReject": Checker {
+          "action": "update",
+          "checker": [MockFunction],
+          "name": "dynamicCheckerReject",
         },
+        "static": StaticChecker {
+          "action": "update",
+          "checker": [Function],
+          "name": "static",
+          "permission": false,
+        },
+      },
+      "resource": Resource {
+        "accessControl": [Circular],
+        "children": Object {},
+        "name": "resource2",
+        "parent": Resource {
+          "accessControl": [Circular],
+          "children": Object {
+            "resource1": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource1",
+              "parent": [Circular],
+              "path": "resource1",
+            },
+            "resource2": [Circular],
+          },
+          "name": "",
+          "parent": null,
+          "path": "",
+        },
+        "path": "resource2",
+      },
+      "role": Role {
+        "accessControl": [Circular],
+        "name": "role2",
       },
     },
   },
@@ -624,19 +930,19 @@ exports[`Access Control returns resources 1`] = `
 Resource {
   "accessControl": AccessControl {
     "_permissions": Object {
-      "resource1#role1": Permission {
-        "dynamicCheckers": Object {
-          "create": Object {
-            "dynamicCheckerResolve": DynamicChecker {
-              "checker": [MockFunction],
-            },
+      "resource1#role1#create": Permission {
+        "action": "create",
+        "checkers": Object {
+          "dynamicCheckerResolve": Checker {
+            "action": "create",
+            "checker": [MockFunction],
+            "name": "dynamicCheckerResolve",
           },
-          "delete": Object {},
-          "read": Object {},
-          "update": Object {
-            "dynamicCheckerReject": DynamicChecker {
-              "checker": [MockFunction],
-            },
+          "static": StaticChecker {
+            "action": "create",
+            "checker": [Function],
+            "name": "static",
+            "permission": true,
           },
         },
         "resource": Resource {
@@ -650,63 +956,20 @@ Resource {
           "accessControl": [Circular],
           "name": "role1",
         },
-        "staticChecker": StaticChecker {
-          "permissions": Object {
-            "create": true,
-            "delete": false,
-            "read": false,
-            "update": true,
-          },
-        },
       },
-      "resource2#role1": Permission {
-        "dynamicCheckers": Object {
-          "create": Object {
-            "dynamicCheckerResolve": DynamicChecker {
-              "checker": [MockFunction],
-            },
+      "resource2#role2#create": Permission {
+        "action": "create",
+        "checkers": Object {
+          "dynamicCheckerResolve": Checker {
+            "action": "create",
+            "checker": [MockFunction],
+            "name": "dynamicCheckerResolve",
           },
-          "delete": Object {},
-          "read": Object {},
-          "update": Object {
-            "dynamicCheckerReject": DynamicChecker {
-              "checker": [MockFunction],
-            },
-          },
-        },
-        "resource": Resource {
-          "accessControl": [Circular],
-          "children": Object {},
-          "name": "resource2",
-          "parent": [Circular],
-          "path": "resource2",
-        },
-        "role": Role {
-          "accessControl": [Circular],
-          "name": "role1",
-        },
-        "staticChecker": StaticChecker {
-          "permissions": Object {
-            "create": true,
-            "delete": false,
-            "read": false,
-            "update": true,
-          },
-        },
-      },
-      "resource2#role2": Permission {
-        "dynamicCheckers": Object {
-          "create": Object {
-            "dynamicCheckerResolve": DynamicChecker {
-              "checker": [MockFunction],
-            },
-          },
-          "delete": Object {},
-          "read": Object {},
-          "update": Object {
-            "dynamicCheckerReject": DynamicChecker {
-              "checker": [MockFunction],
-            },
+          "static": StaticChecker {
+            "action": "create",
+            "checker": [Function],
+            "name": "static",
+            "permission": true,
           },
         },
         "resource": Resource {
@@ -720,13 +983,32 @@ Resource {
           "accessControl": [Circular],
           "name": "role2",
         },
-        "staticChecker": StaticChecker {
-          "permissions": Object {
-            "create": true,
-            "delete": false,
-            "read": false,
-            "update": true,
+      },
+      "resource2#role2#update": Permission {
+        "action": "update",
+        "checkers": Object {
+          "dynamicCheckerReject": Checker {
+            "action": "update",
+            "checker": [MockFunction],
+            "name": "dynamicCheckerReject",
           },
+          "static": StaticChecker {
+            "action": "update",
+            "checker": [Function],
+            "name": "static",
+            "permission": false,
+          },
+        },
+        "resource": Resource {
+          "accessControl": [Circular],
+          "children": Object {},
+          "name": "resource2",
+          "parent": [Circular],
+          "path": "resource2",
+        },
+        "role": Role {
+          "accessControl": [Circular],
+          "name": "role2",
         },
       },
     },
@@ -749,19 +1031,19 @@ Resource {
     "resource1": Resource {
       "accessControl": AccessControl {
         "_permissions": Object {
-          "resource1#role1": Permission {
-            "dynamicCheckers": Object {
-              "create": Object {
-                "dynamicCheckerResolve": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+          "resource1#role1#create": Permission {
+            "action": "create",
+            "checkers": Object {
+              "dynamicCheckerResolve": Checker {
+                "action": "create",
+                "checker": [MockFunction],
+                "name": "dynamicCheckerResolve",
               },
-              "delete": Object {},
-              "read": Object {},
-              "update": Object {
-                "dynamicCheckerReject": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+              "static": StaticChecker {
+                "action": "create",
+                "checker": [Function],
+                "name": "static",
+                "permission": true,
               },
             },
             "resource": [Circular],
@@ -769,63 +1051,20 @@ Resource {
               "accessControl": [Circular],
               "name": "role1",
             },
-            "staticChecker": StaticChecker {
-              "permissions": Object {
-                "create": true,
-                "delete": false,
-                "read": false,
-                "update": true,
-              },
-            },
           },
-          "resource2#role1": Permission {
-            "dynamicCheckers": Object {
-              "create": Object {
-                "dynamicCheckerResolve": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+          "resource2#role2#create": Permission {
+            "action": "create",
+            "checkers": Object {
+              "dynamicCheckerResolve": Checker {
+                "action": "create",
+                "checker": [MockFunction],
+                "name": "dynamicCheckerResolve",
               },
-              "delete": Object {},
-              "read": Object {},
-              "update": Object {
-                "dynamicCheckerReject": DynamicChecker {
-                  "checker": [MockFunction],
-                },
-              },
-            },
-            "resource": Resource {
-              "accessControl": [Circular],
-              "children": Object {},
-              "name": "resource2",
-              "parent": [Circular],
-              "path": "resource2",
-            },
-            "role": Role {
-              "accessControl": [Circular],
-              "name": "role1",
-            },
-            "staticChecker": StaticChecker {
-              "permissions": Object {
-                "create": true,
-                "delete": false,
-                "read": false,
-                "update": true,
-              },
-            },
-          },
-          "resource2#role2": Permission {
-            "dynamicCheckers": Object {
-              "create": Object {
-                "dynamicCheckerResolve": DynamicChecker {
-                  "checker": [MockFunction],
-                },
-              },
-              "delete": Object {},
-              "read": Object {},
-              "update": Object {
-                "dynamicCheckerReject": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+              "static": StaticChecker {
+                "action": "create",
+                "checker": [Function],
+                "name": "static",
+                "permission": true,
               },
             },
             "resource": Resource {
@@ -839,13 +1078,32 @@ Resource {
               "accessControl": [Circular],
               "name": "role2",
             },
-            "staticChecker": StaticChecker {
-              "permissions": Object {
-                "create": true,
-                "delete": false,
-                "read": false,
-                "update": true,
+          },
+          "resource2#role2#update": Permission {
+            "action": "update",
+            "checkers": Object {
+              "dynamicCheckerReject": Checker {
+                "action": "update",
+                "checker": [MockFunction],
+                "name": "dynamicCheckerReject",
               },
+              "static": StaticChecker {
+                "action": "update",
+                "checker": [Function],
+                "name": "static",
+                "permission": false,
+              },
+            },
+            "resource": Resource {
+              "accessControl": [Circular],
+              "children": Object {},
+              "name": "resource2",
+              "parent": [Circular],
+              "path": "resource2",
+            },
+            "role": Role {
+              "accessControl": [Circular],
+              "name": "role2",
             },
           },
         },
@@ -872,19 +1130,19 @@ Resource {
     "resource2": Resource {
       "accessControl": AccessControl {
         "_permissions": Object {
-          "resource1#role1": Permission {
-            "dynamicCheckers": Object {
-              "create": Object {
-                "dynamicCheckerResolve": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+          "resource1#role1#create": Permission {
+            "action": "create",
+            "checkers": Object {
+              "dynamicCheckerResolve": Checker {
+                "action": "create",
+                "checker": [MockFunction],
+                "name": "dynamicCheckerResolve",
               },
-              "delete": Object {},
-              "read": Object {},
-              "update": Object {
-                "dynamicCheckerReject": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+              "static": StaticChecker {
+                "action": "create",
+                "checker": [Function],
+                "name": "static",
+                "permission": true,
               },
             },
             "resource": Resource {
@@ -898,57 +1156,20 @@ Resource {
               "accessControl": [Circular],
               "name": "role1",
             },
-            "staticChecker": StaticChecker {
-              "permissions": Object {
-                "create": true,
-                "delete": false,
-                "read": false,
-                "update": true,
-              },
-            },
           },
-          "resource2#role1": Permission {
-            "dynamicCheckers": Object {
-              "create": Object {
-                "dynamicCheckerResolve": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+          "resource2#role2#create": Permission {
+            "action": "create",
+            "checkers": Object {
+              "dynamicCheckerResolve": Checker {
+                "action": "create",
+                "checker": [MockFunction],
+                "name": "dynamicCheckerResolve",
               },
-              "delete": Object {},
-              "read": Object {},
-              "update": Object {
-                "dynamicCheckerReject": DynamicChecker {
-                  "checker": [MockFunction],
-                },
-              },
-            },
-            "resource": [Circular],
-            "role": Role {
-              "accessControl": [Circular],
-              "name": "role1",
-            },
-            "staticChecker": StaticChecker {
-              "permissions": Object {
-                "create": true,
-                "delete": false,
-                "read": false,
-                "update": true,
-              },
-            },
-          },
-          "resource2#role2": Permission {
-            "dynamicCheckers": Object {
-              "create": Object {
-                "dynamicCheckerResolve": DynamicChecker {
-                  "checker": [MockFunction],
-                },
-              },
-              "delete": Object {},
-              "read": Object {},
-              "update": Object {
-                "dynamicCheckerReject": DynamicChecker {
-                  "checker": [MockFunction],
-                },
+              "static": StaticChecker {
+                "action": "create",
+                "checker": [Function],
+                "name": "static",
+                "permission": true,
               },
             },
             "resource": [Circular],
@@ -956,13 +1177,26 @@ Resource {
               "accessControl": [Circular],
               "name": "role2",
             },
-            "staticChecker": StaticChecker {
-              "permissions": Object {
-                "create": true,
-                "delete": false,
-                "read": false,
-                "update": true,
+          },
+          "resource2#role2#update": Permission {
+            "action": "update",
+            "checkers": Object {
+              "dynamicCheckerReject": Checker {
+                "action": "update",
+                "checker": [MockFunction],
+                "name": "dynamicCheckerReject",
               },
+              "static": StaticChecker {
+                "action": "update",
+                "checker": [Function],
+                "name": "static",
+                "permission": false,
+              },
+            },
+            "resource": [Circular],
+            "role": Role {
+              "accessControl": [Circular],
+              "name": "role2",
             },
           },
         },
@@ -998,19 +1232,19 @@ Object {
   "role1": Role {
     "accessControl": AccessControl {
       "_permissions": Object {
-        "resource1#role1": Permission {
-          "dynamicCheckers": Object {
-            "create": Object {
-              "dynamicCheckerResolve": DynamicChecker {
-                "checker": [MockFunction],
-              },
+        "resource1#role1#create": Permission {
+          "action": "create",
+          "checkers": Object {
+            "dynamicCheckerResolve": Checker {
+              "action": "create",
+              "checker": [MockFunction],
+              "name": "dynamicCheckerResolve",
             },
-            "delete": Object {},
-            "read": Object {},
-            "update": Object {
-              "dynamicCheckerReject": DynamicChecker {
-                "checker": [MockFunction],
-              },
+            "static": StaticChecker {
+              "action": "create",
+              "checker": [Function],
+              "name": "static",
+              "permission": true,
             },
           },
           "resource": Resource {
@@ -1036,75 +1270,20 @@ Object {
             "path": "resource1",
           },
           "role": [Circular],
-          "staticChecker": StaticChecker {
-            "permissions": Object {
-              "create": true,
-              "delete": false,
-              "read": false,
-              "update": true,
-            },
-          },
         },
-        "resource2#role1": Permission {
-          "dynamicCheckers": Object {
-            "create": Object {
-              "dynamicCheckerResolve": DynamicChecker {
-                "checker": [MockFunction],
-              },
+        "resource2#role2#create": Permission {
+          "action": "create",
+          "checkers": Object {
+            "dynamicCheckerResolve": Checker {
+              "action": "create",
+              "checker": [MockFunction],
+              "name": "dynamicCheckerResolve",
             },
-            "delete": Object {},
-            "read": Object {},
-            "update": Object {
-              "dynamicCheckerReject": DynamicChecker {
-                "checker": [MockFunction],
-              },
-            },
-          },
-          "resource": Resource {
-            "accessControl": [Circular],
-            "children": Object {},
-            "name": "resource2",
-            "parent": Resource {
-              "accessControl": [Circular],
-              "children": Object {
-                "resource1": Resource {
-                  "accessControl": [Circular],
-                  "children": Object {},
-                  "name": "resource1",
-                  "parent": [Circular],
-                  "path": "resource1",
-                },
-                "resource2": [Circular],
-              },
-              "name": "",
-              "parent": null,
-              "path": "",
-            },
-            "path": "resource2",
-          },
-          "role": [Circular],
-          "staticChecker": StaticChecker {
-            "permissions": Object {
-              "create": true,
-              "delete": false,
-              "read": false,
-              "update": true,
-            },
-          },
-        },
-        "resource2#role2": Permission {
-          "dynamicCheckers": Object {
-            "create": Object {
-              "dynamicCheckerResolve": DynamicChecker {
-                "checker": [MockFunction],
-              },
-            },
-            "delete": Object {},
-            "read": Object {},
-            "update": Object {
-              "dynamicCheckerReject": DynamicChecker {
-                "checker": [MockFunction],
-              },
+            "static": StaticChecker {
+              "action": "create",
+              "checker": [Function],
+              "name": "static",
+              "permission": true,
             },
           },
           "resource": Resource {
@@ -1133,13 +1312,47 @@ Object {
             "accessControl": [Circular],
             "name": "role2",
           },
-          "staticChecker": StaticChecker {
-            "permissions": Object {
-              "create": true,
-              "delete": false,
-              "read": false,
-              "update": true,
+        },
+        "resource2#role2#update": Permission {
+          "action": "update",
+          "checkers": Object {
+            "dynamicCheckerReject": Checker {
+              "action": "update",
+              "checker": [MockFunction],
+              "name": "dynamicCheckerReject",
             },
+            "static": StaticChecker {
+              "action": "update",
+              "checker": [Function],
+              "name": "static",
+              "permission": false,
+            },
+          },
+          "resource": Resource {
+            "accessControl": [Circular],
+            "children": Object {},
+            "name": "resource2",
+            "parent": Resource {
+              "accessControl": [Circular],
+              "children": Object {
+                "resource1": Resource {
+                  "accessControl": [Circular],
+                  "children": Object {},
+                  "name": "resource1",
+                  "parent": [Circular],
+                  "path": "resource1",
+                },
+                "resource2": [Circular],
+              },
+              "name": "",
+              "parent": null,
+              "path": "",
+            },
+            "path": "resource2",
+          },
+          "role": Role {
+            "accessControl": [Circular],
+            "name": "role2",
           },
         },
       },
@@ -1175,19 +1388,19 @@ Object {
   "role2": Role {
     "accessControl": AccessControl {
       "_permissions": Object {
-        "resource1#role1": Permission {
-          "dynamicCheckers": Object {
-            "create": Object {
-              "dynamicCheckerResolve": DynamicChecker {
-                "checker": [MockFunction],
-              },
+        "resource1#role1#create": Permission {
+          "action": "create",
+          "checkers": Object {
+            "dynamicCheckerResolve": Checker {
+              "action": "create",
+              "checker": [MockFunction],
+              "name": "dynamicCheckerResolve",
             },
-            "delete": Object {},
-            "read": Object {},
-            "update": Object {
-              "dynamicCheckerReject": DynamicChecker {
-                "checker": [MockFunction],
-              },
+            "static": StaticChecker {
+              "action": "create",
+              "checker": [Function],
+              "name": "static",
+              "permission": true,
             },
           },
           "resource": Resource {
@@ -1216,78 +1429,20 @@ Object {
             "accessControl": [Circular],
             "name": "role1",
           },
-          "staticChecker": StaticChecker {
-            "permissions": Object {
-              "create": true,
-              "delete": false,
-              "read": false,
-              "update": true,
-            },
-          },
         },
-        "resource2#role1": Permission {
-          "dynamicCheckers": Object {
-            "create": Object {
-              "dynamicCheckerResolve": DynamicChecker {
-                "checker": [MockFunction],
-              },
+        "resource2#role2#create": Permission {
+          "action": "create",
+          "checkers": Object {
+            "dynamicCheckerResolve": Checker {
+              "action": "create",
+              "checker": [MockFunction],
+              "name": "dynamicCheckerResolve",
             },
-            "delete": Object {},
-            "read": Object {},
-            "update": Object {
-              "dynamicCheckerReject": DynamicChecker {
-                "checker": [MockFunction],
-              },
-            },
-          },
-          "resource": Resource {
-            "accessControl": [Circular],
-            "children": Object {},
-            "name": "resource2",
-            "parent": Resource {
-              "accessControl": [Circular],
-              "children": Object {
-                "resource1": Resource {
-                  "accessControl": [Circular],
-                  "children": Object {},
-                  "name": "resource1",
-                  "parent": [Circular],
-                  "path": "resource1",
-                },
-                "resource2": [Circular],
-              },
-              "name": "",
-              "parent": null,
-              "path": "",
-            },
-            "path": "resource2",
-          },
-          "role": Role {
-            "accessControl": [Circular],
-            "name": "role1",
-          },
-          "staticChecker": StaticChecker {
-            "permissions": Object {
-              "create": true,
-              "delete": false,
-              "read": false,
-              "update": true,
-            },
-          },
-        },
-        "resource2#role2": Permission {
-          "dynamicCheckers": Object {
-            "create": Object {
-              "dynamicCheckerResolve": DynamicChecker {
-                "checker": [MockFunction],
-              },
-            },
-            "delete": Object {},
-            "read": Object {},
-            "update": Object {
-              "dynamicCheckerReject": DynamicChecker {
-                "checker": [MockFunction],
-              },
+            "static": StaticChecker {
+              "action": "create",
+              "checker": [Function],
+              "name": "static",
+              "permission": true,
             },
           },
           "resource": Resource {
@@ -1313,14 +1468,45 @@ Object {
             "path": "resource2",
           },
           "role": [Circular],
-          "staticChecker": StaticChecker {
-            "permissions": Object {
-              "create": true,
-              "delete": false,
-              "read": false,
-              "update": true,
+        },
+        "resource2#role2#update": Permission {
+          "action": "update",
+          "checkers": Object {
+            "dynamicCheckerReject": Checker {
+              "action": "update",
+              "checker": [MockFunction],
+              "name": "dynamicCheckerReject",
+            },
+            "static": StaticChecker {
+              "action": "update",
+              "checker": [Function],
+              "name": "static",
+              "permission": false,
             },
           },
+          "resource": Resource {
+            "accessControl": [Circular],
+            "children": Object {},
+            "name": "resource2",
+            "parent": Resource {
+              "accessControl": [Circular],
+              "children": Object {
+                "resource1": Resource {
+                  "accessControl": [Circular],
+                  "children": Object {},
+                  "name": "resource1",
+                  "parent": [Circular],
+                  "path": "resource1",
+                },
+                "resource2": [Circular],
+              },
+              "name": "",
+              "parent": null,
+              "path": "",
+            },
+            "path": "resource2",
+          },
+          "role": [Circular],
         },
       },
       "_resources": Resource {

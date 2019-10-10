@@ -1,68 +1,110 @@
 [
   {
-    "role": "role1",
+    "action": "create",
+    "permissions": [
+      true,
+      "dynamicCheckerResolve"
+    ],
     "resource": "resource1",
-    "permissions": {
-      "create": [
-        true,
-        "dynamicCheckerResolve"
-      ],
-      "read": [
-        false,
-        "dynamicCheckerResolve"
-      ],
-      "update": [
-        true,
-        "dynamicCheckerReject"
-      ],
-      "delete": [
-        false,
-        "dynamicCheckerReject"
-      ]
-    }
+    "role": "role1"
   },
   {
-    "role": "role1",
-    "resource": "resource2",
-    "permissions": {
-      "create": [
-        true,
-        "dynamicCheckerResolve"
-      ],
-      "read": [
-        false,
-        "dynamicCheckerResolve"
-      ],
-      "update": [
-        true,
-        "dynamicCheckerReject"
-      ],
-      "delete": [
-        false,
-        "dynamicCheckerReject"
-      ]
-    }
+    "action": "read",
+    "permissions": [
+      false,
+      "dynamicCheckerResolve"
+    ],
+    "resource": "resource1",
+    "role": "role1"
   },
   {
-    "role": "role2",
+    "action": "update",
+    "permissions": [
+      true,
+      "dynamicCheckerReject"
+    ],
+    "resource": "resource1",
+    "role": "role1"
+  },
+  {
+    "action": "delete",
+    "permissions": [
+      false,
+      "dynamicCheckerReject"
+    ],
+    "resource": "resource1",
+    "role": "role1"
+  },
+  {
+    "action": "create",
+    "permissions": [
+      true,
+      "dynamicCheckerResolve"
+    ],
     "resource": "resource2",
-    "permissions": {
-      "create": [
-        true,
-        "dynamicCheckerResolve"
-      ],
-      "read": [
-        false,
-        "dynamicCheckerResolve"
-      ],
-      "update": [
-        true,
-        "dynamicCheckerReject"
-      ],
-      "delete": [
-        false,
-        "dynamicCheckerReject"
-      ]
-    }
+    "role": "role1"
+  },
+  {
+    "action": "read",
+    "permissions": [
+      false,
+      "dynamicCheckerResolve"
+    ],
+    "resource": "resource2",
+    "role": "role1"
+  },
+  {
+    "action": "update",
+    "permissions": [
+      true,
+      "dynamicCheckerReject"
+    ],
+    "resource": "resource2",
+    "role": "role1"
+  },
+  {
+    "action": "delete",
+    "permissions": [
+      false,
+      "dynamicCheckerReject"
+    ],
+    "resource": "resource2",
+    "role": "role1"
+  },
+  {
+    "action": "create",
+    "permissions": [
+      true,
+      "dynamicCheckerResolve"
+    ],
+    "resource": "resource2",
+    "role": "role2"
+  },
+  {
+    "action": "read",
+    "permissions": [
+      false,
+      "dynamicCheckerResolve"
+    ],
+    "resource": "resource2",
+    "role": "role2"
+  },
+  {
+    "action": "update",
+    "permissions": [
+      true,
+      "dynamicCheckerReject"
+    ],
+    "resource": "resource2",
+    "role": "role2"
+  },
+  {
+    "action": "delete",
+    "permissions": [
+      false,
+      "dynamicCheckerReject"
+    ],
+    "resource": "resource2",
+    "role": "role2"
   }
 ]

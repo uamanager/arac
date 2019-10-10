@@ -1,0 +1,11 @@
+[
+  {
+    "action": "create",
+    "permissions": [
+      true,
+      "static"
+    ],
+    "resource": "resource1",
+    "role": "role1"
+  }
+]

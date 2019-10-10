@@ -1,5 +1,6 @@
-import {AccessControl, TAccessControlDynamicCheckersMap} from './accessControl';
+import {AccessControl} from './accessControl';
 import {Actions} from './actions';
+import {TPermissionCheckersMap} from './permission';
 
 export class AccessCreate {
   constructor (
@@ -10,7 +11,7 @@ export class AccessCreate {
 
   public create (
     resourceName: string,
-    dynamicCheckers?: TAccessControlDynamicCheckersMap
+    dynamicCheckers?: TPermissionCheckersMap
   ) {
     this.createPermission(Actions.CREATE, resourceName, dynamicCheckers);
 
@@ -19,7 +20,7 @@ export class AccessCreate {
 
   public read (
     resourceName: string,
-    dynamicCheckers?: TAccessControlDynamicCheckersMap
+    dynamicCheckers?: TPermissionCheckersMap
   ) {
     this.createPermission(Actions.READ, resourceName, dynamicCheckers);
 
@@ -28,7 +29,7 @@ export class AccessCreate {
 
   public update (
     resourceName: string,
-    dynamicCheckers?: TAccessControlDynamicCheckersMap
+    dynamicCheckers?: TPermissionCheckersMap
   ) {
     this.createPermission(Actions.UPDATE, resourceName, dynamicCheckers);
 
@@ -37,7 +38,7 @@ export class AccessCreate {
 
   public delete (
     resourceName: string,
-    dynamicCheckers?: TAccessControlDynamicCheckersMap
+    dynamicCheckers?: TPermissionCheckersMap
   ) {
     this.createPermission(Actions.DELETE, resourceName, dynamicCheckers);
 
@@ -47,11 +48,12 @@ export class AccessCreate {
   private createPermission (
     action: Actions,
     resourceName: string,
-    dynamicCheckers: TAccessControlDynamicCheckersMap
+    dynamicCheckers: TPermissionCheckersMap
   ) {
     this.accessControl.permission(
       action,
-      AccessControl.hash(this.roleName, resourceName),
+      this.roleName,
+      resourceName,
       this.allowed,
       dynamicCheckers
     );

@@ -1,0 +1,10 @@
+[
+  {
+    "action": "test",
+    "permissions": [
+      true
+    ],
+    "resource": "resource1",
+    "role": "role1"
+  }
+]
