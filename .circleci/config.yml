@@ -17,8 +17,6 @@ jobs:
       - run:
           name: Install Yarn Dependencies
           command: yarn install
-          
-      - sonarcloud/scan
       - run:
           name: Run Test
           command: |
@@ -28,6 +26,8 @@ jobs:
             ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
           environment:
             JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+      - sonarcloud/scan
+      
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
