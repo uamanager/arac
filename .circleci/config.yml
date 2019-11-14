@@ -21,7 +21,7 @@ jobs:
           name: Run Test
           command: |
             ./cc-test-reporter before-build
-            yarn test --ci --runInBand --reporters=default --reporters=jest-junit
+            yarn test --ci --runInBand --reporters=default --reporters=jest-junit --reporters=lcov
             cp ./coverage/clover.xml ./
             ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
           environment:
