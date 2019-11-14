@@ -7,7 +7,7 @@ module.exports = {
   },
   "collectCoverage": true,
   "coveragePathIgnorePatterns": ["/node_modules/", "/tests/"],
-  "coverageReporters": ["text", "text-summary", "clover"],
+  "coverageReporters": ["text", "text-summary", "clover", "lcov"],
   "reporters": ["default", "jest-junit"],
   "verbose": true
 };
