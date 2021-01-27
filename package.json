@@ -48,7 +48,7 @@
     "rollup-plugin-sourcemaps": "0.4.2",
     "rollup-plugin-typescript2": "0.24.3",
     "standard-version": "7.0.0",
-    "ts-jest": "24.1.0",
+    "ts-jest": "24.3.0",
     "typescript": "3.7.2"
   },
   "config": {
